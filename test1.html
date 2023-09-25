@@ -1,7 +1,7 @@
 <div>
     <div id="debugHeader">
         Debug Header :
-        <div id="param-content"></div>
+        <div id="JSONparams"></div>
     </div>
     <H2>Que voulez-vous retourner ? </H2>
     <div>
@@ -30,7 +30,7 @@
 </div>
 
 <script>
-    alert("url:"+window.location.search.substring(1));
+    alert("hello from popup");
 
     /*function getQueryParams() {
         alert("ici");
@@ -63,17 +63,7 @@
     }*/
 
 
-    const paragraphElement = document.getElementById('votre-element-p'); // Remplacez 'votre-element-p' par l'ID de votre élément <p>
-    const paragraphText = paragraphElement.textContent;
-
-    try {
-        const jsonObject = JSON.parse(paragraphText);
-        // Utilisez jsonObject pour accéder aux propriétés JSON
-        console.log(jsonObject);
-    } catch (error) {
-        console.error("Le contenu du <p> n'est pas un JSON valide.");
-    }
-
+    const paragraphElement = document.getElementById('JSONparams'); // Remplacez 'votre-element-p' 
 
     const classiqueReturnButton = document.getElementById('returnClassique');
     const turneeReturnButton = document.getElementById('returnTurnee');
