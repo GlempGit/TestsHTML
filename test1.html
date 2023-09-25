@@ -23,15 +23,16 @@
             Retour Standard
         </button-->
     </div>
-    <div>
+    <div align="center">
         <a href="testURL.HTML">Retour Standard</a>
     </div>
 
 </div>
 
 <script>
+    alert("url:"+window.location.search.substring(1));
 
-    function getQueryParams() {
+    /*function getQueryParams() {
         alert("ici");
         const queryParams = {};
         const queryString = window.location.search.substring(1); // Ignore le "?"
@@ -59,7 +60,7 @@
         paramContentDiv.textContent = 'La valeur du paramètre nom_parametre est : ' + params['nom_parametre'];
     } else {
         paramContentDiv.textContent = 'Le paramètre nom_parametre n\'existe pas dans l\'URL.';
-    }
+    }*/
 
 
     const paragraphElement = document.getElementById('votre-element-p'); // Remplacez 'votre-element-p' par l'ID de votre élément <p>
