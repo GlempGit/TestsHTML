@@ -33,11 +33,7 @@
 
         // Insert and execute your dynamic JavaScript code here
 
-        alert("hello from popup");
-        const paragraphElement = document.getElementById('JSONparams'); // Remplacez 'votre-element-p' 
-        paragraphElement.textContent = "test debug";
-
-        /*function getQueryParams() {
+        function getQueryParams() {
             alert("ici");
             const queryParams = {};
             const queryString = window.location.search.substring(1); // Ignore le "?"
@@ -57,15 +53,15 @@
         // Appel de la fonction pour obtenir les paramètres de l'URL
         const params = getQueryParams();
     
-        // Supposons que vous ayez une div avec l'ID "param-content" dans votre HTML
-        const paramContentDiv = document.getElementById('param-content');
-    
+        // const paramContentDiv = document.getElementById('param-content');
+        const paragraphElement = document.getElementById('JSONparams'); // Remplacez 
+
         // Vérifiez si un paramètre spécifique existe et affichez-le dans la div
         if (params.hasOwnProperty('images')) {
-            paramContentDiv.textContent = 'La valeur du paramètre nom_parametre est : ' + params['nom_parametre'];
+            paragraphElement.textContent = 'La valeur du paramètre nom_parametre est : ' + params['nom_parametre'];
         } else {
-            paramContentDiv.textContent = 'Le paramètre nom_parametre n\'existe pas dans l\'URL.';
-        }*/
+            paragraphElement.textContent = 'Le paramètre nom_parametre n\'existe pas dans l\'URL.';
+        }
 
 
 
