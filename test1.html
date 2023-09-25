@@ -10,20 +10,19 @@
     <div>
         <img id="productImage" style="width: 50px;height: 100px;" />
     </div>
-    Vous pouvez desormais retourner un produit via Turnee <a href="{{ 'your-custom-page-url' }}/retourTurnee.html"
-        class="custom-button">en savoir plus</a>
-    <div class="product-form__buttons form">
+    <div class="product-form__buttons form" align="center">
         <button type="submit" name="returnTurnee" id="returnTurnee" class="product-form__submit button button--primary">
             Retour Turnee
         </button>
-
-
+        <br>
+        Vous pouvez desormais retourner un produit via Turnee <a href="{{ 'your-custom-page-url' }}/retourTurnee.html"
+        class="custom-button">en savoir plus</a>
+        <br>
         <!--button type="submit" name="returnClassique" id="returnClassique"
             class="product-form__submit button button--primary">
             Retour Standard
         </button-->
-    </div>
-    <div align="center">
+    
         <a href="testURL.HTML">Retour Standard</a>
     </div>
 
@@ -56,6 +55,7 @@
         // const paramContentDiv = document.getElementById('param-content');
         const paragraphElement = document.getElementById('JSONparams'); // Remplacez 
 
+        alert(params);
         // Vérifiez si un paramètre spécifique existe et affichez-le dans la div
         if (params.hasOwnProperty('images')) {
             paragraphElement.textContent = 'La valeur du paramètre nom_parametre est : ' + params['nom_parametre'];
