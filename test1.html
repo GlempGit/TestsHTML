@@ -1,11 +1,22 @@
 <div>
+    <div id="debugHeader">
+        Debug Header :
+        <div id="param-content"></div>
+    </div>
+    <H1>Que voulez-vous retourner ? </H1>
+    <div>
+        Date de la commande : <label id="orderDate"></label>
+    </div>
+    <div>
+        <img id="productImage" style="width: 50px;height: 100px;" />
+    </div>
     Vous pouvez desormais retourner un produit via Turnee <a href="{{ 'your-custom-page-url' }}/retourTurnee.html"
         class="custom-button">en savoir plus</a>
     <div class="product-form__buttons form">
         <button type="submit" name="returnTurnee" id="returnTurnee" class="product-form__submit button button--primary">
             Retour Turnee
         </button>
-        
+
 
         <!--button type="submit" name="returnClassique" id="returnClassique"
             class="product-form__submit button button--primary">
@@ -15,10 +26,50 @@
     <div>
         <a href="testURL.HTML">Retour Standard</a>
     </div>
-    
+
 </div>
 
 <script>
+
+    function getQueryParams() {
+        const queryParams = {};
+        const queryString = window.location.search.substring(1); // Ignore le "?"
+        const params = queryString.split('&');
+
+        for (const param of params) {
+            const [key, value] = param.split('=');
+            queryParams[key] = decodeURIComponent(value);
+        }
+
+        return queryParams;
+    }
+
+    // Appel de la fonction pour obtenir les paramètres de l'URL
+    const params = getQueryParams();
+
+    // Supposons que vous ayez une div avec l'ID "param-content" dans votre HTML
+    const paramContentDiv = document.getElementById('param-content');
+
+    // Vérifiez si un paramètre spécifique existe et affichez-le dans la div
+    if (params.hasOwnProperty('nom_parametre')) {
+        paramContentDiv.textContent = 'La valeur du paramètre nom_parametre est : ' + params['nom_parametre'];
+    } else {
+        paramContentDiv.textContent = 'Le paramètre nom_parametre n\'existe pas dans l\'URL.';
+    }
+
+
+    const paragraphElement = document.getElementById('votre-element-p'); // Remplacez 'votre-element-p' par l'ID de votre élément <p>
+    const paragraphText = paragraphElement.textContent;
+
+    try {
+        const jsonObject = JSON.parse(paragraphText);
+        // Utilisez jsonObject pour accéder aux propriétés JSON
+        console.log(jsonObject);
+    } catch (error) {
+        console.error("Le contenu du <p> n'est pas un JSON valide.");
+    }
+
+
     const classiqueReturnButton = document.getElementById('returnClassique');
     const turneeReturnButton = document.getElementById('returnTurnee');
 
