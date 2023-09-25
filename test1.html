@@ -30,110 +30,115 @@
 </div>
 
 <script>
-    alert("hello from popup");
-    const paragraphElement = document.getElementById('JSONparams'); // Remplacez 'votre-element-p' 
-    paragraphElement.textContent = "test debug";
 
-    /*function getQueryParams() {
-        alert("ici");
-        const queryParams = {};
-        const queryString = window.location.search.substring(1); // Ignore le "?"
-        const params = queryString.split('&');
+    // Ensure the DOM is fully loaded before running JavaScript
+    document.addEventListener('DOMContentLoaded', function () {
+        // Insert and execute your dynamic JavaScript code here
 
-        alert(queryString);
-        for (const param of params) {
-            const [key, value] = param.split('=');
-            queryParams[key] = decodeURIComponent(value);
-            alert(key+"="+queryParams[key] );
+        alert("hello from popup");
+        const paragraphElement = document.getElementById('JSONparams'); // Remplacez 'votre-element-p' 
+        paragraphElement.textContent = "test debug";
 
-        }
-
-        return queryParams;
-    }
-
-    // Appel de la fonction pour obtenir les paramètres de l'URL
-    const params = getQueryParams();
-
-    // Supposons que vous ayez une div avec l'ID "param-content" dans votre HTML
-    const paramContentDiv = document.getElementById('param-content');
-
-    // Vérifiez si un paramètre spécifique existe et affichez-le dans la div
-    if (params.hasOwnProperty('images')) {
-        paramContentDiv.textContent = 'La valeur du paramètre nom_parametre est : ' + params['nom_parametre'];
-    } else {
-        paramContentDiv.textContent = 'Le paramètre nom_parametre n\'existe pas dans l\'URL.';
-    }*/
-
-
-
-    const classiqueReturnButton = document.getElementById('returnClassique');
-    const turneeReturnButton = document.getElementById('returnTurnee');
-
-    // Add an event listener to the button
-    classiqueReturnButton.addEventListener('click', function () {
-        alert('Retour classique de la marque');
-    });
-
-    // Add an event listener to the button
-    turneeReturnButton.addEventListener('click', function () {
-
-        // Get the order created_at value from Shopify
-        const shopifyOrderCreatedAt = '{{ order.created_at }}';
-
-        // Create a Date object from the Shopify date string
-        const shopifyDate = new Date(shopifyOrderCreatedAt);
-
-        // Format the date as "YYYY/MM/DD HH:MM:SS"
-        const formattedDate =
-            `${shopifyDate.getFullYear()}-` +
-            `${(shopifyDate.getMonth() + 1).toString().padStart(2, '0')}-` +
-            `${shopifyDate.getDate().toString().padStart(2, '0')} ` +
-            `${shopifyDate.getHours().toString().padStart(2, '0')}:` +
-            `${shopifyDate.getMinutes().toString().padStart(2, '0')}:` +
-            `${shopifyDate.getSeconds().toString().padStart(2, '0')}`;
-
-        alert(formattedDate);
-
-        const requestData = {
-            orderNumber: '{{ order.name }}',
-            orderDateCreated: formattedDate,
-            productNumber: 'ABC123',
-            reason: 'Doesn\'t like the product',
-            contactInformation: {
-                firstName: '{{ order.customer.first_name }}',
-                lastName: '{{ order.customer.last_name }}',
-                email: '{{ order.customer.email }}',
-                //phoneNumber: '{{ order.customer.phone }}'
-                phoneNumber: '0123456789'
+        /*function getQueryParams() {
+            alert("ici");
+            const queryParams = {};
+            const queryString = window.location.search.substring(1); // Ignore le "?"
+            const params = queryString.split('&');
+    
+            alert(queryString);
+            for (const param of params) {
+                const [key, value] = param.split('=');
+                queryParams[key] = decodeURIComponent(value);
+                alert(key+"="+queryParams[key] );
+    
             }
-        };
+    
+            return queryParams;
+        }
+    
+        // Appel de la fonction pour obtenir les paramètres de l'URL
+        const params = getQueryParams();
+    
+        // Supposons que vous ayez une div avec l'ID "param-content" dans votre HTML
+        const paramContentDiv = document.getElementById('param-content');
+    
+        // Vérifiez si un paramètre spécifique existe et affichez-le dans la div
+        if (params.hasOwnProperty('images')) {
+            paramContentDiv.textContent = 'La valeur du paramètre nom_parametre est : ' + params['nom_parametre'];
+        } else {
+            paramContentDiv.textContent = 'Le paramètre nom_parametre n\'existe pas dans l\'URL.';
+        }*/
 
-        const body = JSON.stringify(requestData);
 
-        fetch('https://myturneesapilibrary.lm.r.appspot.com/api/returnProduct', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                //'Authorization': 'Bearer YOUR_API_TOKEN' // Add any required authentication headers here
-            },
-            body
-        })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the API response as needed
-                console.log(data);
 
-                // Display the message when the button is clicked
-                document.getElementById('messageContainer').innerHTML = 'Merci pour votre retour Turnee. Numéro de commande {{ order.name }}';
+        const classiqueReturnButton = document.getElementById('returnClassique');
+        const turneeReturnButton = document.getElementById('returnTurnee');
+
+        // Add an event listener to the button
+        classiqueReturnButton.addEventListener('click', function () {
+            alert('Retour classique de la marque');
+        });
+
+        // Add an event listener to the button
+        turneeReturnButton.addEventListener('click', function () {
+
+            // Get the order created_at value from Shopify
+            const shopifyOrderCreatedAt = '{{ order.created_at }}';
+
+            // Create a Date object from the Shopify date string
+            const shopifyDate = new Date(shopifyOrderCreatedAt);
+
+            // Format the date as "YYYY/MM/DD HH:MM:SS"
+            const formattedDate =
+                `${shopifyDate.getFullYear()}-` +
+                `${(shopifyDate.getMonth() + 1).toString().padStart(2, '0')}-` +
+                `${shopifyDate.getDate().toString().padStart(2, '0')} ` +
+                `${shopifyDate.getHours().toString().padStart(2, '0')}:` +
+                `${shopifyDate.getMinutes().toString().padStart(2, '0')}:` +
+                `${shopifyDate.getSeconds().toString().padStart(2, '0')}`;
+
+            alert(formattedDate);
+
+            const requestData = {
+                orderNumber: '{{ order.name }}',
+                orderDateCreated: formattedDate,
+                productNumber: 'ABC123',
+                reason: 'Doesn\'t like the product',
+                contactInformation: {
+                    firstName: '{{ order.customer.first_name }}',
+                    lastName: '{{ order.customer.last_name }}',
+                    email: '{{ order.customer.email }}',
+                    //phoneNumber: '{{ order.customer.phone }}'
+                    phoneNumber: '0123456789'
+                }
+            };
+
+            const body = JSON.stringify(requestData);
+
+            fetch('https://myturneesapilibrary.lm.r.appspot.com/api/returnProduct', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    //'Authorization': 'Bearer YOUR_API_TOKEN' // Add any required authentication headers here
+                },
+                body
             })
-            .catch(error => {
-                // Handle errors
-                console.error(error);
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the API response as needed
+                    console.log(data);
 
-                // Display the message when the button is clicked
-                document.getElementById('messageContainer').innerHTML = '!!! Erreur lors de l enregistrement de votre retour Turnee. Numéro de commande {{ order.name }}';
-            });
+                    // Display the message when the button is clicked
+                    document.getElementById('messageContainer').innerHTML = 'Merci pour votre retour Turnee. Numéro de commande {{ order.name }}';
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error(error);
 
+                    // Display the message when the button is clicked
+                    document.getElementById('messageContainer').innerHTML = '!!! Erreur lors de l enregistrement de votre retour Turnee. Numéro de commande {{ order.name }}';
+                });
+
+        });
     });
-
 </script>
