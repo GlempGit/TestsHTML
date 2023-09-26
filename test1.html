@@ -26,36 +26,19 @@
         <a href="testURL.HTML">Retour Standard</a>
     </div>
 
-</div>
+
 
 <script>
+        // Get the JSON data from the request body
+        const requestData = JSON.parse(document.body.textContent);
 
-        // Insert and execute your dynamic JavaScript code here
-
-        function getQueryParams() {
-            alert("ici");
-            const queryParams = {};
-            const queryString = window.location.search.substring(1); // Ignore le "?"
-            const params = queryString.split('&');
-    
-            alert(queryString);
-            for (const param of params) {
-                const [key, value] = param.split('=');
-                queryParams[key] = decodeURIComponent(value);
-                alert(key+"="+queryParams[key] );
-    
-            }
-    
-            return queryParams;
-        }
-    
-        // Appel de la fonction pour obtenir les paramètres de l'URL
-        const params = getQueryParams();
-    
+        // Access and use the data as needed
+        const key1Value = requestData.id;
+        
         // const paramContentDiv = document.getElementById('param-content');
         const paragraphElement = document.getElementById('JSONparams'); // Remplacez 
 
-        alert(params);
+        alert(key1Value);
         // Vérifiez si un paramètre spécifique existe et affichez-le dans la div
         if (params.hasOwnProperty('images')) {
             paragraphElement.textContent = 'La valeur du paramètre nom_parametre est : ' + params['nom_parametre'];
@@ -136,3 +119,4 @@
         });
 
 </script>
+</div>
