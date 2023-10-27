@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+
+<body>
+    <!-- Start Customization Turnee -->
+    
+    <div id="myModal" class="modal">
+        <header>
+            <span class="close"></span>
+            <div id="messageContainer"></div>
+        </header>
+        <div class="modal-content">
+            <div id="modal-message-container">Loading ...</div>
+        </div>
+    </div>
+    <div class="product-form__buttons form">
+        <button type="submit" name="returnButton" id="returnButton" class="product-form__submit button button--primary">
+            Retour
+        </button>
+    </div>
+    <!-- Add a container for displaying the message -->
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
+
+    <script>
+
+        const checkboxes = document.querySelectorAll('.product-checkbox');
+        const returnButton = document.getElementById('returnButton');
+        const modal = document.getElementById('myModal');
+        const productDescription = document.getElementById('product-description');
+
+        returnButton.disabled = false;
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', () => {
+                const checkedCheckboxes = Array.from(checkboxes).filter(
+                    (checkbox) => checkbox.checked
+                );
+
+                // Si au moins une case à cocher est cochée, activez le bouton retour classique
+                if (checkedCheckboxes.length >= 1) {
+                    returnButton.disabled = false;
+                } else {
+                    returnButton.disabled = true;
+                }
+            });
+        });
+
+        var tabProducts = [];
+        var product; product = {
+            orderLineItemID: "24228802175298",
+            productNumber: "8774796771650",
+            productTitle: "VANS | ERA 59 (DESERT COWBOY) - 11 / light_brown",
+            productPrice: 10995.0,
+            productURL: "/products/vans-era-59-desert-cowboy",
+            productDescription: "Vans are a staple in skate culture and street style, and the Vans Era 59 is no exception. This classic lace-up skate shoe is focused on ultimate comfort and cool. Constructed from canvas with leather accents which sets it apart from the original Era, it features a soft footbed, double stitched vamp, a padded tongue and lining, as well as Vans&#39; signature waffle sole. ",
+            productSize: "11 / light_brown",
+            productColor: "11",
+            productImages: [
+                "//test-turnee-1.myshopify.com/cdn/shop/products/b6257e8a4b6a5805da251cb090a82b09_medium.jpg?v=1695733053",
+
+                "//test-turnee-1.myshopify.com/cdn/shop/products/d025a70b9e83bf6749e31faffbf0eda2_medium.jpg?v=1695733053",
+
+                "//test-turnee-1.myshopify.com/cdn/shop/products/aff688191f200039ff779e53441f786e_medium.jpg?v=1695733053",
+
+                "//test-turnee-1.myshopify.com/cdn/shop/products/dad6dc6854fa34fc6c3a653283b72fa8_medium.jpg?v=1695733053",
+
+                "//test-turnee-1.myshopify.com/cdn/shop/products/4082c622251534264e7eedf8f34682f8_medium.jpg?v=1695733053"
+            ]
+        };
+        tabProducts.push(product); product = {
+            orderLineItemID: "14228802208066",
+            productNumber: "8774798377282",
+            productTitle: "NIKE | CRACKLE PRINT TB TEE - m / blue",
+            productPrice: 4000.0,
+            productURL: "/products/nike-crackle-print-tb-tee",
+            productDescription: "Meet your new favorite tee, the Nike Crackle Print T-Shirt. Bringing its A-game in soft, premium fabric, it features a ribbed crew neck and a woven Nike label on the hem.",
+            productSize: "m / blue",
+            productColor: "m",
+            productImages: [
+                "//test-turnee-1.myshopify.com/cdn/shop/products/62a3dd0421fc5ccf4df6815b3694d734_medium.jpg?v=1695733082",
+
+                "//test-turnee-1.myshopify.com/cdn/shop/products/ef0746b3c879000196dfce266154b537_medium.jpg?v=1695733082",
+
+                "//test-turnee-1.myshopify.com/cdn/shop/products/544c0236ac6a8def363f3db689aacf08_medium.jpg?v=1695733082"
+            ]
+        };
+        tabProducts.push(product); 
+        
+        returnButton.addEventListener('click', () => {
+            var selectedProduct = [];
+
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    selectedProduct.push(checkbox.value);
+                }
+            });
+
+            // Find the selected product by its ID
+            const lineItemId = selectedProduct[0];
+
+            const productData = tabProducts[0];
+
+            // Set the content of the modal with the product data
+            // Convert the productData object to a JSON string
+            // const productDataJSON = JSON.stringify(productData, null, 2);
+
+            // Générer un horodatage aléatoire pour éviter la mise en cache
+            const randomTimestamp = Date.now();
+            
+            // Create an object to hold the JSON data
+            const jsonData = {
+                orderCreatedDate: "2023-09-26 09:12:02 -0400",
+                orderNumber: "1037",
+                //orderNumber : randomTimestamp +"",
+                customer: {
+                    firstName: "Gregory",
+                    lastName: "Lempereur",
+                    email: "gregory.lempereur@gmail.com",
+                    phoneNumber: "",
+                },
+                products: [productData],
+            };
+
+            const googleCloudURL = "http://localhost:3003/api/modalContent"; //url de test
+
+            // Mettre à jour l'URL avec le paramètre de requête aléatoire
+            const updatedURL = `${googleCloudURL}?debug=Y&time=${randomTimestamp}`;
+
+            // Charger le contenu à partir de Google Cloud via AJAX
+            $.ajax({
+                url: updatedURL,
+                dataType: "html", // Ou "json" si le contenu est au format JSON
+                type: 'POST', // Use POST method to send data in the request body
+                contentType: 'application/json', // Set the content type to JSON
+                data: JSON.stringify(jsonData), // Convert the JSON object to a string
+                success: function (data) {
+
+                    console.log(data);
+                    // Placer le contenu dans la fenêtre modale
+                    $("#modal-message-container").html(data);
+
+                    var codes = document.getElementById("modal-message-container").getElementsByTagName("script");
+                    //alert("lancement script");
+                    /*for (var i = 0; i < codes.length; i++) {
+                        eval(codes[i].text);
+                    }*/
+                    //alert("aprés lancement script");
+                    // Afficher la fenêtre modale
+                    $("#myModal").css("display", "block");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // En cas d'erreur, afficher l'erreur renvoyée par le serveur dans le conteneur de message modal
+                    //$("#modal-message-container").text("[jqXHR: " + jqXHR+",textStatus: " + textStatus+",Erreur: " + errorThrown+"]");
+
+                    $("#modal-message-container").text("erreur lors du chargement.");
+
+                    // Afficher la fenêtre modale
+                    $("#myModal").css("display", "block");
+                }
+            });
+        });
+        const closeButton = document.querySelector('.close');
+
+        closeButton.addEventListener('click', () => {
+            // Nettoyer le contenu dans la fenêtre modale
+            $("#modal-message-container").html("");
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                // Nettoyer le contenu dans la fenêtre modale
+                $("#modal-message-container").html("");
+                modal.style.display = 'none';
+            }
+        });
+
+    </script>
+    </p>
+    <style>
+        /* The Modal (background) */
+
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.7);
+            /* Black with opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .close {
+            cursor: pointer;
+
+            &:after,
+            &:before {
+                content: "";
+                height: 20px;
+                width: 20px;
+                border-top: 3px solid #000;
+                position: absolute;
+                top: 7px;
+                right: -8px;
+                @include rotate(-45deg);
+            }
+
+            &:before {
+                right: 6px;
+                @include rotate(45deg);
+            }
+
+            &:hover {
+                @include opacity(0.3);
+            }
+
+        }
+    </style><!-- end Customization Turnee -->
+
+
+</body>
+
+</html>
