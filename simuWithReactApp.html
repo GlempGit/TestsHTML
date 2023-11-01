@@ -25,12 +25,18 @@
     </div>
 
     <script>
+        const min = 1; // Valeur minimale (incluse)
+        const max = 10000000; // Valeur maximale (exclue, donc 10 000 000 est inclus dans l'intervalle)
+
+        const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+
+        console.log("Random Product Number = ", randomNumber); // Affiche un entier aléatoire entre 1 et 10 000 000
 
         var tabProducts = [];
 
         const product1 = {
             orderLineItemID: 14228802208066,
-            productNumber: 8774798377282,
+            productNumber: randomNumber,
             productTitle: "NIKE | CRACKLE PRINT TB TEE - m / blue",
             productPrice: 40,
             productURL: "/products/nike-crackle-print-tb-tee",
@@ -61,7 +67,7 @@
 
 
         function openModal() {
-            var token = "123456789";
+            var token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL2lkZW50aXR5dG9vbGtpdC5nb29nbGVhcGlzLmNvbS9nb29nbGUuaWRlbnRpdHkuaWRlbnRpdHl0b29sa2l0LnYxLklkZW50aXR5VG9vbGtpdCIsImlhdCI6MTY5ODMyNDUzOSwiZXhwIjoxNjk4MzI4MTM5LCJpc3MiOiJmaXJlYmFzZS1hZG1pbnNkay1lcnNudEBhZG1pbi10dXJuZWUuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJzdWIiOiJmaXJlYmFzZS1hZG1pbnNkay1lcnNudEBhZG1pbi10dXJuZWUuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJ1aWQiOiJhWU9XcXNPRlo5ZEUzQ1VNZ1JlRW1SMVUzMHMxIiwiY2xhaW1zIjp7ImlzQWRtaW4iOmZhbHNlfX0.nIazg-qayb-a4WF9Oij5BjfolGGQ44_HxiI4dSrjYvdhRmdGrkH9pNchbY-VcJp5Yqo9gDHsXJgWojPFIiHfh4WdZpLj21lohXMqHQGFkkuHi6XC5NTUnp41j_XuOPGq6xz-wdA0PCh9aIZiUmdPW6PiHfm5vuwaikNHuk86NRT3ioyNALSXlWk8yQMYcR1BsK5i28Q9Lo3JvADTzFq50NDJB0kofLpsebXciKMUpzKlIcmXlY-rfMcaxsnDmIosPAiR9pC8R6zONLBCBSrI2BB14haUKMwn8wPYI7riY6gwo_Vb5LRP9jXnbHSEtK6JtsAxyyyXLfrMN0mBV0TbDw";
             var iframe = document.getElementById("myIframe");
             iframe.src = "http://localhost:3000/register?token=" + token + "&products=" + encodedProducts;
             iframe.style.display = "block";

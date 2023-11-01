@@ -46,6 +46,9 @@
             });
         });
 
+        const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+
+
         var tabProducts = [];
         var product; product = {
             orderLineItemID: "24228802175298",
@@ -70,7 +73,7 @@
         };
         tabProducts.push(product); product = {
             orderLineItemID: "14228802208066",
-            productNumber: "8774798377282",
+            productNumber: randomNumber,
             productTitle: "NIKE | CRACKLE PRINT TB TEE - m / blue",
             productPrice: 4000.0,
             productURL: "/products/nike-crackle-print-tb-tee",
